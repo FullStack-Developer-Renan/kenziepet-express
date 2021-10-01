@@ -2,7 +2,7 @@ import { getRepository } from "typeorm";
 import { Group } from "../../entities";
 import { GroupInterface } from "../../types/group.type";
 
-export const createGroup = async (group: any) => {
+export const createGroup = async (group: GroupInterface) => {
   const groupRepository = getRepository(Group);
 
   const groupExists = await groupRepository.findOne({

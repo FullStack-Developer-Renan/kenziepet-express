@@ -26,7 +26,7 @@ export class Animal {
   @Column()
   sex!: string;
 
-  @ManyToOne(() => Group, (group) => group.animal)
+  @ManyToOne(() => Group, (group) => group.animal, { cascade: true })
   group!: Group;
 
   @ManyToMany(
@@ -35,5 +35,5 @@ export class Animal {
     { cascade: true }
   )
   @JoinTable()
-  characteristic!: Characteristic[];
+  characteristics!: Characteristic[];
 }

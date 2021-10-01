@@ -14,6 +14,4 @@ export interface AnimalInterface {
 export interface GroupInterface {
   name: string;
   scientific_name: string;
-  // animal: Array<AnimalInterface>;
-  // id: number;
 }

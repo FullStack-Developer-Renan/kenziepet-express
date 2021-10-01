@@ -9,6 +9,6 @@ export class Characteristic {
   @Column()
   name!: string;
 
-  @ManyToMany(() => Animal, (animal) => animal.characteristic)
+  @ManyToMany(() => Animal, (animal) => animal.characteristics)
   animals!: Animal[];
 }
