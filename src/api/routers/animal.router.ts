@@ -8,19 +8,25 @@ import {
 } from "../controllers/animal.controller";
 import passport from "passport";
 import filterIsSuperUSer from "../middlewares/is_superuser";
+import { animalValidator } from "../middlewares/animal.validator";
+import authentication from "../middlewares/authentication";
 
 const router = Router();
 
 export default () => {
-  router.post(
-    "/animals",
-    passport.authenticate("jwt", { session: false }),
-    create
+  router.use(passport.authenticate("jwt", { session: false }));
+
+  router.post("/animals", filterIsSuperUSer, animalValidator, create);
+  router.get("/animals", authentication, list);
+  router.get("/animals/:animalId", authentication, retrieve);
+  router.patch(
+    "/animals/:animalId",
+    filterIsSuperUSer,
+    animalValidator,
+    update
   );
-  router.get("/animals", list);
-  router.get("/animals/:animalId", retrieve);
-  router.patch("/animals/:animalId", update);
-  router.delete("/animals/:animalId", destroy);
+  router.put("/animals/:animalId", filterIsSuperUSer, animalValidator, update);
+  router.delete("/animals/:animalId", filterIsSuperUSer, destroy);
 
   return router;
 };

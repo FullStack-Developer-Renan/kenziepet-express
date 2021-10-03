@@ -6,11 +6,14 @@ const filterIsSuperUSer = async (
   res: Response,
   next: NextFunction
 ) => {
+  if (!req.user) {
+    res.sendStatus(401);
+  }
   const { is_superuser } = req.user as User;
 
   if (is_superuser) return next();
 
-  res.sendStatus(401);
+  if (!is_superuser) res.sendStatus(403);
 };
 
 export default filterIsSuperUSer;
